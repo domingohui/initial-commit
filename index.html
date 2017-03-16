@@ -1,0 +1,28 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>The HTML5 Herald</title>
+        <meta name="description" content="The HTML5 Herald">
+        <meta name="author" content="SitePoint">
+
+        <!--[if lt IE 9]>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+        <![endif]-->
+        <script src="https://unpkg.com/vue"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            {{ message }}
+            <button v-on:click="fetch_first_commit('domingohui', 'up')">Action</button>
+
+            <div v-if="show_commit">
+                <FirstCommit v-bind:date="date" />
+            </div>
+        </div>
+    </body>
+    <script src="main.js"></script>
+</html>
