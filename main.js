@@ -22,7 +22,6 @@ function fetch_first_commit (username, repo) {
     fetch(call_url)
         .then((response)=>response.json())
         .then((data)=>{
-            console.log(data);
             let commit = get_earliest_commit(data);
             this.date = commit.commit.committer.date;
             this.show_commit = true;
@@ -30,5 +29,6 @@ function fetch_first_commit (username, repo) {
 }
 
 function get_earliest_commit(commits) {
+    // For now, assume the last commit is the first one 
     return commits[commits.length-1];
 }

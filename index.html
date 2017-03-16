@@ -16,8 +16,10 @@
 
     <body>
         <div id="app">
-            {{ message }}
-            <button v-on:click="fetch_first_commit('domingohui', 'up')">Action</button>
+            <input placeHolder="Username" />
+            <input placeHolder="Repo name" />
+
+            <button v-on:click="fetch_first_commit('', '')">Get the first commit!</button>
 
             <div v-if="show_commit">
                 <FirstCommit v-bind:date="date" />
