@@ -6,7 +6,8 @@ Vue.component('firstcommit', {
 var prompt = new Vue({
     el: '#app',
     data: {
-        message: 'Enter username',
+        username: '',
+        repo: '',
         show_commit: false,
         date: null
     },

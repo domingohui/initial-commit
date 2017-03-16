@@ -16,10 +16,10 @@
 
     <body>
         <div id="app">
-            <input placeHolder="Username" />
-            <input placeHolder="Repo name" />
+            <input v-model="username" placeHolder="Username" />
+            <input v-model="repo" placeHolder="Repo name" />
 
-            <button v-on:click="fetch_first_commit('', '')">Get the first commit!</button>
+            <button v-on:click="fetch_first_commit(username, repo)">Get the first commit!</button>
 
             <div v-if="show_commit">
                 <FirstCommit v-bind:date="date" />
