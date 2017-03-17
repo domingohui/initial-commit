@@ -11,20 +11,43 @@
         <!--[if lt IE 9]>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
         <![endif]-->
+        <link rel="stylesheet" type="text/css" media="screen" href="slate/stylesheets/stylesheet.css">
         <script src="https://unpkg.com/vue"></script>
     </head>
 
     <body>
-        <div id="app">
-            <input v-model="username" placeHolder="Username" />
-            <input v-model="repo" placeHolder="Repo name" />
-
-            <button v-on:click="fetch_first_commit">Get the first commit!</button>
-
-            <div v-if="show_commit">
-                <FirstCommit v-bind:commit="commit" />
-            </div>
+        <!-- HEADER -->
+        <div id="header_wrap" class="outer">
+            <header class="inner">
+                <a id="forkme_banner" href="https://github.com/domingohui/initial-commit">View on GitHub</a>
+                <h1 id="project_title">Initial Commit</h1>
+                <h2 id="project_tagline">Find the first commit of any repo!</h2>
+            </header>
         </div>
+
+        <!-- APP MAIN -->
+        <div id="app" class="outer">
+            <section id="main_content" class="inner">
+                <h3>&lt; / 	&gt;</h3>
+                <input v-model="username" placeHolder="Username" />
+                <input v-model="repo" placeHolder="Repo name" />
+
+                <button v-on:click="fetch_first_commit">Get the first commit!</button>
+
+                <div v-if="show_commit">
+                    <FirstCommit v-bind:commit="commit" />
+                </div>
+            </section>
+        </div>
+
+        <!-- FOOTER  -->
+        <div id="footer_wrap" class="outer">
+            <footer class="inner">
+                <p class="copyright">Created by <a href="https://github.com/domingohui">Domingo</a></p>
+                <p class="copyright">Slate theme maintained by <a href="https://github.com/jasoncostello">Jason Costello</a></p>
+            </footer>
+        </div>
+
     </body>
     <script src="main.js"></script>
 </html>
