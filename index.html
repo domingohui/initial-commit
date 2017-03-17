@@ -37,7 +37,7 @@
                 <div v-if="show_commit">
                     <FirstCommit v-bind:commit="commit" />
                 </div>
-                <div v-else-if="error != null">
+                <div v-else-if="error">
                     <ErrorMsg v-bind:message="error" />
                 </div>
             </section>

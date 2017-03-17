@@ -52,8 +52,11 @@ function fetch_first_commit () {
                 throw response;
             })
             .then((data)=>{
+                // Pass commit object back to this -> which is linked to the firstcommit component
                 this.commit = get_earliest_commit(data);
                 this.show_commit = true;
+                
+                // Clear error message
                 this.error = null;
             })
             .catch((error_response) => {
@@ -70,7 +73,12 @@ function fetch_first_commit () {
                     error_msg = 'Oops.. Something\'s not right. ';
                     error_msg += 'Please feel free to open a PR @ https://github.com/domingohui/initial-commit';
                 }
+                // Set error message
                 this.error = error_msg;
+
+                // Clear previous commit displayed
+                this.commit = null;
+                this.show_commit = false;
             });
     }
     else if (!username) {
