@@ -1,4 +1,3 @@
 [submodule "slate"]
 	path = slate
-	url = git@github.com:domingohui/slate.git
-    branch = domingohui
+	url = https://github.com/domingohui/slate/ 
