@@ -22,3 +22,4 @@ in ```index.html``` to
 - [x] Error detection (invalid repo/username, over rate limit)
 - [x] Work on CSS
 - [ ] Clear button
+- [ ] Need to support repos with LOTS of commits. API seems to only show a portion of commits.
