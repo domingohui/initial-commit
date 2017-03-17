@@ -1,0 +1,6 @@
+@import url(slate/stylesheets/stylesheet.css);
+
+.error p {
+    color: red;
+    font-weight: bold;
+}

@@ -19,5 +19,6 @@ in ```index.html``` to
 
 #### TODO
 
-- [ ] Work on CSS
+- [x] Error detection (invalid repo/username, over rate limit)
+- [x] Work on CSS
 - [ ] Clear button

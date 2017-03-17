@@ -11,7 +11,7 @@
         <!--[if lt IE 9]>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
         <![endif]-->
-        <link rel="stylesheet" type="text/css" media="screen" href="slate/stylesheets/stylesheet.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="more.css">
         <script src="https://unpkg.com/vue"></script>
     </head>
 
@@ -36,6 +36,9 @@
 
                 <div v-if="show_commit">
                     <FirstCommit v-bind:commit="commit" />
+                </div>
+                <div v-else-if="error != null">
+                    <ErrorMsg v-bind:message="error" />
                 </div>
             </section>
         </div>
