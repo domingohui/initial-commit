@@ -1,6 +1,12 @@
 Vue.component('firstcommit', {
     props: ['commit'],
-    template: '<div>First commit: {{ commit }}</div>'
+    template: `
+    <div>
+    <h4><a :href="commit.html_url">{{ commit.commit.message }}</a></h4>
+    <h4>{{ commit.commit.committer.date }}</h4>
+    <h5>By {{ commit.author.login }}</h5>
+    <p>{{ commit.sha }}</p>
+    </div>`
 });
 
 var prompt = new Vue({
@@ -28,7 +34,7 @@ function fetch_first_commit () {
         fetch(call_url)
             .then((response)=>response.json())
             .then((data)=>{
-                this.commit = Object.assign({}, get_earliest_commit(data));
+                this.commit = get_earliest_commit(data);
                 this.show_commit = true;
             });
     }
