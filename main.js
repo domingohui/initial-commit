@@ -1,7 +1,9 @@
 'use strict';
 
 Vue.component('firstcommit', {
-    props: ['commit'],
+    props: {
+        commit: Object
+    },
     template: `
     <div>
     <h4><a :href="commit.html_url">{{ commit.commit.message }}</a></h4>
@@ -12,7 +14,12 @@ Vue.component('firstcommit', {
 });
 
 Vue.component('errormsg', {
-    props: ['message'],
+    props: {
+        message: {
+            type: String,
+            default: null
+        }
+    },
     template: `
     <div class="error">
     <p>{{ message||'Something went wrong...' }}</p>
