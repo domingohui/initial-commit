@@ -7,7 +7,10 @@ Fire up ```index.html``` to get rollin'
 Or go to [https://domingohui.github.io/initial-commit/](https://domingohui.github.io/initial-commit/)
 
 ### Production mode
-Change 
+
+This branch uses the developer version of vue js.
+
+For production, switch to ```master``` branch or change 
 ```
 <script src="https://unpkg.com/vue"></script>
 ```
