@@ -31,7 +31,8 @@ var prompt = new Vue({
         error: null // No error message shown when null
     },
     methods: {
-        fetch_first_commit: fetch_first_commit_wrapper
+        fetch_first_commit: fetch_first_commit_wrapper,
+        reset: reset
     },
 });
 
@@ -54,4 +55,12 @@ function fetch_first_commit_wrapper () {
             this.error = error_msg;
         }
     );
+}
+
+function reset () {
+    this.commit = null;
+    this.show_commit = false;
+    this.username = '';
+    this.repo = '';
+    this.error = null;
 }

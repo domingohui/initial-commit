@@ -30,10 +30,13 @@
         <div id="app" class="outer">
             <section id="main_content" class="inner">
                 <h3>&lt; / 	&gt;</h3>
-                <input v-model="username" placeHolder="Username" />
-                <input v-model="repo" placeHolder="Repo name" />
+                <form v-on:submit.prevent="onSubmit">
+                    <input v-model="username" placeHolder="Username" />
+                    <input v-model="repo" placeHolder="Repo name" />
 
-                <button v-on:click="fetch_first_commit">Get the first commit!</button>
+                    <button type="submit" v-on:click="fetch_first_commit">Get the first commit!</button>
+                    <button type="reset" v-on:click="reset">Clear</button>
+                </form>
 
                 <div v-if="show_commit">
                     <FirstCommit v-bind:commit="commit" />

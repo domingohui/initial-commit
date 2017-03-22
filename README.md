@@ -21,5 +21,5 @@ in ```index.html``` to
 
 - [x] Error detection (invalid repo/username, over rate limit)
 - [x] Work on CSS
-- [ ] Clear button
+- [x] Clear button
 - [ ] (In progress) Need to support repos with LOTS of commits. Still limited by API rate limit. 
