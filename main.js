@@ -31,65 +31,27 @@ var prompt = new Vue({
         error: null // No error message shown when null
     },
     methods: {
-        fetch_first_commit: fetch_first_commit
+        fetch_first_commit: fetch_first_commit_wrapper
     },
 });
 
-function fetch_first_commit () {
-    // Trim whitespace in input
-    let username = this.username.trim();
-    let repo = this.repo.trim();
+function fetch_first_commit_wrapper () {
+    // Pass commit object back to this -> which is linked to the firstcommit component
+    fetch_first_commit (this.username, this.repo, 
+        (commit) => {
+            // Need a callback for async fetch in the helper
+            this.commit = commit;
+            this.show_commit = true;
+            // Clear error message
+            this.error = null;
+        },
+        (error_msg) => {
+            // Clear previous commit displayed
+            this.commit = null;
+            this.show_commit = false;
 
-    // Make API calls
-    if (username && repo) {
-        let repo_base_url = 'https://api.github.com/repos/';
-        let call_url = repo_base_url + username + '/' + repo + '/commits';
-        fetch(call_url)
-            .then((response)=> {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw response;
-            })
-            .then((data)=>{
-                // Pass commit object back to this -> which is linked to the firstcommit component
-                this.commit = get_earliest_commit(data);
-                this.show_commit = true;
-                
-                // Clear error message
-                this.error = null;
-            })
-            .catch((error_response) => {
-                let error_msg = '';
-                if (error_response.status && error_response.status === 404) {
-                    // Invalid username or repo name
-                    error_msg = 'Hmmm I can\'t seem to find repo. Please check username and repo name.';
-                }
-                else if (error_response.status && error_response.status === 403) {
-                    error_msg = 'API limit exceeded... https://developer.github.com/v3/#rate-limiting';
-                }
-                else {
-                    // Other errors :\
-                    error_msg = 'Oops.. Something\'s not right. ';
-                    error_msg += 'Please feel free to open a PR @ https://github.com/domingohui/initial-commit';
-                }
-                // Set error message
-                this.error = error_msg;
-
-                // Clear previous commit displayed
-                this.commit = null;
-                this.show_commit = false;
-            });
-    }
-    else if (!username) {
-        this.error = 'Please enter a username...';
-    }
-    else if (!repo) {
-        this.error = 'And a repo name would be nice!';
-    }
-}
-
-function get_earliest_commit(commits) {
-    // For now, assume the last commit is the first one 
-    return commits[commits.length-1];
+            // Display error msg
+            this.error = error_msg;
+        }
+    );
 }
