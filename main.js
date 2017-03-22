@@ -8,8 +8,8 @@ Vue.component('firstcommit', {
     <div>
     <h4><a :href="commit.html_url">{{ commit.commit.message }}</a></h4>
     <h4>{{ commit.commit.committer.date }}</h4>
-    <h5>By {{ commit.author.login }}</h5>
-    <p>{{ commit.sha }}</p>
+    <h5>By <a :href="commit.author.html_url">{{ commit.author.login }}</a></h5>
+    <p><a :href="commit.html_url">{{ commit.sha }}</a></p>
     </div>`
 });
 

@@ -30,7 +30,8 @@ function fetch_first_commit (u, r, callback, error, sha='') {
                     error_msg = 'Hmmm I can\'t seem to find repo. Please check username and repo name.';
                 }
                 else if (error_response.status && error_response.status === 403) {
-                    error_msg = 'API limit exceeded... https://developer.github.com/v3/#rate-limiting';
+                    error_msg = 'API limit exceeded...';
+                    error_msg += 'https://developer.github.com/v3/#rate-limiting';
                 }
                 else {
                     // Other errors
