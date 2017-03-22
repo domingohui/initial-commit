@@ -1,6 +1,6 @@
 'use strict';
 
-function fetch_first_commit (u, r, callback, error) {
+function fetch_first_commit (u, r, callback, error, sha='') {
     // Trim whitespace in input
     let username = u.trim();
     let repo = r.trim();
@@ -8,7 +8,11 @@ function fetch_first_commit (u, r, callback, error) {
     // Make API calls
     if (username && repo) {
         let repo_base_url = 'https://api.github.com/repos/';
-        let call_url = repo_base_url + username + '/' + repo + '/commits';
+        let call_url = repo_base_url + username + '/' + repo + '/commits?per_page=100';
+        if ( sha != '' ) {
+            // For recursive calls to get commits after the specified commit sha
+            call_url += '&sha=' + sha;
+        }
         fetch(call_url)
             .then((response)=> {
                 if (response.ok) {
@@ -17,7 +21,7 @@ function fetch_first_commit (u, r, callback, error) {
                 throw response;
             })
             .then((data)=>{
-                callback(get_earliest_commit(data));
+                callback(get_earliest_commit(u, r, callback, error, data));
             })
             .catch((error_response) => {
                 let error_msg = '';
@@ -45,7 +49,16 @@ function fetch_first_commit (u, r, callback, error) {
     }
 }
 
-function get_earliest_commit(commits) {
-    // For now, assume the last commit is the first one 
-    return commits[commits.length-1];
+function get_earliest_commit(u, r, callback, error, commits) {
+    // Check if we have the first commit
+    if ( commits[commits.length-1].parents.length == 0 ) {
+        // Last commit is the latest
+        // No parents mean that's the first commit!
+        return commits[commits.length-1];
+    }
+    else {
+        // Recursively fetch the 100 commits
+        let sha = commits[commits.length-1].parents[0].sha;
+        return fetch_first_commit (u, r, callback, error, sha);
+    }
 }
